@@ -1,0 +1,156 @@
+import { OnModuleInit } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { Report } from './entities/report.entity.js';
+import { ReportHistory } from './entities/report-history.entity.js';
+import { CreateReportDto } from './dto/create-report.dto.js';
+import { UpdateReportDto } from './dto/update-report.dto.js';
+import { QueryReportDto } from './dto/query-report.dto.js';
+import type { AuthUser } from '../auth/auth-user.js';
+export declare class ReportsService implements OnModuleInit {
+    private repo;
+    private hist;
+    constructor(repo: Repository<Report>, hist: Repository<ReportHistory>);
+    onModuleInit(): Promise<void>;
+    list(q: QueryReportDto, user: AuthUser): Promise<{
+        items: {
+            uuTien: string;
+            id: number;
+            tieuDe: string;
+            loai: string;
+            doiTuong: string;
+            doiTuongKey: string;
+            soTienThietHai: number;
+            ngayXayRa: string;
+            moTa: string | null;
+            nguoiBaoCao: string;
+            trangThai: string;
+            canBo: string;
+            nguoiTaoId: number | null;
+            ngayTao: Date;
+            lichSu: ReportHistory[];
+        }[];
+        total: number;
+        counts: Record<string, number>;
+    }>;
+    lookup(raw: string): Promise<{
+        q: string;
+        mucDo: string;
+        soBaoCao: number;
+        daXacNhan: number;
+        tongThietHai: number;
+        loai: {
+            loai: string;
+            soLan: number;
+        }[];
+        baoCaoGanNhat: string | null;
+    }>;
+    get(id: number, user?: AuthUser): Promise<{
+        lichSu: ReportHistory[];
+        lienQuan: Report[];
+        soBaoCaoCungDoiTuong: number;
+        uuTien: string;
+        id: number;
+        tieuDe: string;
+        loai: string;
+        doiTuong: string;
+        doiTuongKey: string;
+        soTienThietHai: number;
+        ngayXayRa: string;
+        moTa: string | null;
+        nguoiBaoCao: string;
+        trangThai: string;
+        canBo: string;
+        nguoiTaoId: number | null;
+        ngayTao: Date;
+    }>;
+    private insert;
+    create(dto: CreateReportDto, user: AuthUser): Promise<{
+        lichSu: ReportHistory[];
+        lienQuan: Report[];
+        soBaoCaoCungDoiTuong: number;
+        uuTien: string;
+        id: number;
+        tieuDe: string;
+        loai: string;
+        doiTuong: string;
+        doiTuongKey: string;
+        soTienThietHai: number;
+        ngayXayRa: string;
+        moTa: string | null;
+        nguoiBaoCao: string;
+        trangThai: string;
+        canBo: string;
+        nguoiTaoId: number | null;
+        ngayTao: Date;
+    }>;
+    update(id: number, dto: UpdateReportDto, user: AuthUser): Promise<{
+        lichSu: ReportHistory[];
+        lienQuan: Report[];
+        soBaoCaoCungDoiTuong: number;
+        uuTien: string;
+        id: number;
+        tieuDe: string;
+        loai: string;
+        doiTuong: string;
+        doiTuongKey: string;
+        soTienThietHai: number;
+        ngayXayRa: string;
+        moTa: string | null;
+        nguoiBaoCao: string;
+        trangThai: string;
+        canBo: string;
+        nguoiTaoId: number | null;
+        ngayTao: Date;
+    }>;
+    remove(id: number): Promise<{
+        deleted: boolean;
+    }>;
+    stats(user: AuthUser): Promise<{
+        tong: number;
+        choXuLy: number;
+        dangXacMinh: number;
+        daXacNhan: number;
+        tongThietHai: number;
+        byType: Record<string, number>;
+        byMonth: [string, number][];
+        canXuLyGap: {
+            uuTien: string;
+            id: number;
+            tieuDe: string;
+            loai: string;
+            doiTuong: string;
+            doiTuongKey: string;
+            soTienThietHai: number;
+            ngayXayRa: string;
+            moTa: string | null;
+            nguoiBaoCao: string;
+            trangThai: string;
+            canBo: string;
+            nguoiTaoId: number | null;
+            ngayTao: Date;
+            lichSu: ReportHistory[];
+        }[];
+        lapLai: {
+            doiTuong: string;
+            soLan: number;
+            thietHai: number;
+        }[];
+        moiNhat: {
+            uuTien: string;
+            id: number;
+            tieuDe: string;
+            loai: string;
+            doiTuong: string;
+            doiTuongKey: string;
+            soTienThietHai: number;
+            ngayXayRa: string;
+            moTa: string | null;
+            nguoiBaoCao: string;
+            trangThai: string;
+            canBo: string;
+            nguoiTaoId: number | null;
+            ngayTao: Date;
+            lichSu: ReportHistory[];
+        }[];
+    }>;
+}

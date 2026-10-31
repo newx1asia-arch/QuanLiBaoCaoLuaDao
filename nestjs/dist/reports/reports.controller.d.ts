@@ -1,0 +1,90 @@
+import { ReportsService } from './reports.service.js';
+import { CreateReportDto } from './dto/create-report.dto.js';
+import { UpdateReportDto } from './dto/update-report.dto.js';
+import { QueryReportDto } from './dto/query-report.dto.js';
+import type { AuthUser } from '../auth/auth-user.js';
+export declare class ReportsController {
+    private readonly service;
+    constructor(service: ReportsService);
+    list(q: QueryReportDto, user: AuthUser): Promise<{
+        items: {
+            uuTien: string;
+            id: number;
+            tieuDe: string;
+            loai: string;
+            doiTuong: string;
+            doiTuongKey: string;
+            soTienThietHai: number;
+            ngayXayRa: string;
+            moTa: string | null;
+            nguoiBaoCao: string;
+            trangThai: string;
+            canBo: string;
+            nguoiTaoId: number | null;
+            ngayTao: Date;
+            lichSu: import("./entities/report-history.entity.js").ReportHistory[];
+        }[];
+        total: number;
+        counts: Record<string, number>;
+    }>;
+    get(id: number, user: AuthUser): Promise<{
+        lichSu: import("./entities/report-history.entity.js").ReportHistory[];
+        lienQuan: import("./entities/report.entity.js").Report[];
+        soBaoCaoCungDoiTuong: number;
+        uuTien: string;
+        id: number;
+        tieuDe: string;
+        loai: string;
+        doiTuong: string;
+        doiTuongKey: string;
+        soTienThietHai: number;
+        ngayXayRa: string;
+        moTa: string | null;
+        nguoiBaoCao: string;
+        trangThai: string;
+        canBo: string;
+        nguoiTaoId: number | null;
+        ngayTao: Date;
+    }>;
+    create(dto: CreateReportDto, user: AuthUser): Promise<{
+        lichSu: import("./entities/report-history.entity.js").ReportHistory[];
+        lienQuan: import("./entities/report.entity.js").Report[];
+        soBaoCaoCungDoiTuong: number;
+        uuTien: string;
+        id: number;
+        tieuDe: string;
+        loai: string;
+        doiTuong: string;
+        doiTuongKey: string;
+        soTienThietHai: number;
+        ngayXayRa: string;
+        moTa: string | null;
+        nguoiBaoCao: string;
+        trangThai: string;
+        canBo: string;
+        nguoiTaoId: number | null;
+        ngayTao: Date;
+    }>;
+    update(id: number, dto: UpdateReportDto, user: AuthUser): Promise<{
+        lichSu: import("./entities/report-history.entity.js").ReportHistory[];
+        lienQuan: import("./entities/report.entity.js").Report[];
+        soBaoCaoCungDoiTuong: number;
+        uuTien: string;
+        id: number;
+        tieuDe: string;
+        loai: string;
+        doiTuong: string;
+        doiTuongKey: string;
+        soTienThietHai: number;
+        ngayXayRa: string;
+        moTa: string | null;
+        nguoiBaoCao: string;
+        trangThai: string;
+        canBo: string;
+        nguoiTaoId: number | null;
+        ngayTao: Date;
+    }>;
+    remove(id: number): Promise<{
+        deleted: boolean;
+    }>;
+}
