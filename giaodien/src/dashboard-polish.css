@@ -1,0 +1,245 @@
+/* =====================================================================
+   Làm đẹp các khối trên Bảng điều hành
+   File này được nạp SAU index.css (xem main.jsx) nên ghi đè được các luật cũ.
+   Chỉ dùng biến màu có sẵn => chế độ sáng và tối đều đẹp.
+   ===================================================================== */
+
+/* ---------- Tiêu đề từng nhóm khối ---------- */
+.dash-section { display: flex; align-items: center; gap: .7rem; margin: 1.75rem 0 .95rem; }
+.dash-section i { width: 9px; height: 9px; flex: none; background: var(--gold); transform: rotate(45deg); box-shadow: 0 0 0 3px var(--gold-soft); }
+.dash-section h2 { margin: 0; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+.dash-section::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-line), transparent); }
+
+/* Mọi thẻ trên trang: bo góc lớn hơn, viền vàng mảnh phía trên */
+.card { border-radius: 16px; }
+.card.flush { border-radius: 16px; }
+
+/* ---------- 1. Giám sát trực tiếp ---------- */
+.live {
+  position: relative; border-radius: 18px; border: 1px solid rgba(201, 162, 39, .32);
+  background:
+    radial-gradient(560px 240px at 8% -25%, rgba(201, 162, 39, .22), transparent 70%),
+    radial-gradient(520px 300px at 104% 112%, rgba(190, 30, 45, .30), transparent 70%),
+    linear-gradient(135deg, #0f1a31 0%, #16254a 58%, #0f1a30 100%);
+  box-shadow: 0 16px 36px rgba(15, 26, 49, .30), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+.live::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(45deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 24px), repeating-linear-gradient(-45deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 24px); }
+.live > * { position: relative; }
+.live-empty { padding: 1.1rem 1.5rem; }
+.live-main { padding: 1.6rem 1.8rem; }
+.live-pill { padding: .28rem .85rem; box-shadow: 0 0 18px rgba(95, 209, 142, .18); }
+.live-pill.off { box-shadow: none; }
+.live-alert { gap: 1.1rem; align-items: center; }
+.live-alert-icon { width: 58px; height: 58px; border-radius: 16px; color: #2b2205; background: linear-gradient(145deg, #f0d062, #c9a227); border: 0; box-shadow: 0 8px 20px rgba(201, 162, 39, .35), 0 0 0 6px rgba(201, 162, 39, .12); }
+.live-alert-icon svg { width: 26px; height: 26px; }
+.live-alert small { letter-spacing: .18em; }
+.live-alert h2 { font-size: 1.75rem; letter-spacing: -.005em; text-shadow: 0 2px 12px rgba(0, 0, 0, .3); }
+.live-alert p { color: #c3cde2; font-size: .93rem; line-height: 1.6; }
+
+.live-chips { gap: .65rem; margin-top: 1.3rem; }
+.live-chips > * { display: inline-flex; align-items: center; gap: .15rem; padding: .55rem 1rem; border-radius: 999px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .16); color: #c3cde2; font-size: .82rem; transition: background-color .15s, transform .15s, border-color .15s; }
+.live-chips b { margin-right: .4rem; font-family: var(--serif); font-size: 1.25rem; color: #fff; }
+.live-chips a:hover { background: rgba(255, 255, 255, .14); border-color: rgba(201, 162, 39, .6); transform: translateY(-1px); }
+
+/* Quy trình: các bước nối nhau thành một dải */
+.live-flow { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid rgba(255, 255, 255, .12); }
+.live-flow > small { margin-bottom: .75rem; color: #aebcd9; }
+.live-flow ol { counter-reset: step; gap: .3rem; flex-wrap: nowrap; }
+.live-flow li { flex: 1 1 0; min-width: 0; }
+.live-flow li > svg { flex: none; color: rgba(255, 255, 255, .32); }
+.live-flow li a { position: relative; flex: 1; min-width: 0; padding: .7rem .9rem .65rem; border-radius: 12px; background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03)); border: 1px solid rgba(255, 255, 255, .1); transition: transform .15s, background-color .15s, border-color .15s; }
+.live-flow li a::after { counter-increment: step; content: counter(step); position: absolute; top: .55rem; right: .65rem; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, .1); color: #aebcd9; font-size: .7rem; font-weight: 700; }
+.live-flow li a:hover { transform: translateY(-2px); background: rgba(255, 255, 255, .13); }
+.live-flow li a b { font-family: var(--serif); font-size: 1.6rem; }
+.live-flow li a span { margin-top: .1rem; font-size: .78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.live-flow li.has a { border-color: rgba(201, 162, 39, .7); background: linear-gradient(180deg, rgba(201, 162, 39, .22), rgba(201, 162, 39, .06)); box-shadow: 0 6px 16px rgba(201, 162, 39, .14); }
+.live-flow li.has a::after { background: var(--gold); color: #2b2205; }
+.live-flow li.has a span { color: #f0e2ac; }
+
+.live-side { padding: 1.6rem 1.6rem 1.5rem; gap: 1rem; background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02)); border-left: 1px solid rgba(255, 255, 255, .1); backdrop-filter: blur(6px); }
+.live-percent b { font-size: 3.2rem; background: linear-gradient(180deg, #fff, #e8d58a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.live-ring { width: 84px; height: 84px; filter: drop-shadow(0 4px 10px rgba(201, 162, 39, .3)); }
+.live-ring-bg { stroke: rgba(255, 255, 255, .12); stroke-width: 6; }
+.live-ring-fg { stroke: url(#liveRingGrad); stroke-width: 6; }
+.live-ring-tick { stroke-width: 3; }
+.live-bar { height: 8px; background: rgba(255, 255, 255, .12); }
+.live-bar i { background: linear-gradient(90deg, #c9a227, #f0d062); }
+.live-stats { padding: .85rem 1rem; border-radius: 12px; background: rgba(0, 0, 0, .18); border: 1px solid rgba(255, 255, 255, .08); }
+.live-stats b { font-size: 1.02rem; }
+.live-open { padding: .85rem 1rem; border-radius: 12px; background: linear-gradient(180deg, #f0d062, #c9a227); box-shadow: 0 8px 18px rgba(201, 162, 39, .3); transition: transform .15s, filter .15s; }
+.live-open:hover { transform: translateY(-1px); }
+
+/* ---------- 2. Hồ sơ theo mức độ khẩn cấp ---------- */
+.uq.card.flush { background: var(--surface); }
+.uq .card-head { padding: 1.15rem 1.4rem; background: linear-gradient(180deg, var(--surface-alt), var(--surface)); }
+.uq .segmented { padding: 4px; border-radius: 12px; background: var(--neutral-soft); }
+.uq .segmented button { padding: .42rem .9rem; border-radius: 9px; transition: background-color .15s, color .15s; }
+.uq .segmented button.active { box-shadow: 0 2px 8px rgba(60, 20, 20, .12); }
+.uq-list { display: grid; gap: .75rem; padding: .9rem; }
+.uq-item { position: relative; padding: 1rem 1.2rem 1rem 1.4rem; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); box-shadow: none; overflow: hidden; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.uq-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--c); }
+.uq-item:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--c) 45%, var(--border)); box-shadow: 0 10px 24px color-mix(in srgb, var(--c) 14%, transparent); }
+.uq-item.bad { background: linear-gradient(90deg, color-mix(in srgb, var(--danger) 9%, var(--surface)), var(--surface) 55%); }
+.uq-item.warn { background: linear-gradient(90deg, color-mix(in srgb, #d97706 8%, var(--surface)), var(--surface) 55%); }
+.uq-top { gap: .45rem .6rem; }
+.uq-code { padding: .1rem .55rem; border-radius: 6px; background: var(--primary-soft); color: var(--primary); font-size: .78rem; }
+.uq-code:hover { text-decoration: none; background: var(--primary); color: var(--primary-contrast); }
+.uq-place { display: inline-flex; align-items: center; gap: .3rem; font-weight: 500; }
+.uq-place::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--text-faint); }
+.uq-pri, .uq-flag { padding: .12rem .65rem; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); }
+.uq-title { margin: .45rem 0 .7rem; font-size: 1rem; line-height: 1.4; }
+.sla-bar { height: 7px; background: var(--neutral-soft); }
+.sla-bar i { background: linear-gradient(90deg, color-mix(in srgb, var(--success) 70%, #fff), var(--success)); }
+.sla-bar.warn i { background: linear-gradient(90deg, #f0a33a, #d97706); }
+.sla-bar.bad i { background: linear-gradient(90deg, #e0584f, var(--danger)); }
+.uq-side { gap: .7rem; }
+.uq-clock { padding: .45rem .8rem; border-radius: 12px; background: color-mix(in srgb, currentColor 9%, transparent); border: 1px solid color-mix(in srgb, currentColor 24%, transparent); }
+.uq-clock b { font-size: 1.08rem; }
+.uq-actions .btn { border-radius: 10px; }
+.uq-more { margin: 0; border-top: 1px solid var(--border); }
+
+/* ---------- 3. Năng lực xử lý đơn vị ---------- */
+.cap.card { background: linear-gradient(180deg, var(--surface), var(--surface-alt)); }
+.cap-summary { padding: 1.05rem 1.1rem; border-radius: 16px; background: radial-gradient(260px 140px at 100% 0, var(--gold-soft), transparent 70%), var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.cap-ring { filter: drop-shadow(0 4px 10px rgba(60, 20, 20, .12)); }
+.cap-ring-bg { stroke-width: 11; }
+.cap-ring-fg { stroke-width: 11; }
+.cap-ring-num { font-family: var(--serif); font-size: 30px; }
+.cap-remain b { font-family: var(--serif); font-size: 2rem; color: var(--text); }
+.cap-units li { margin-bottom: .6rem; padding: .75rem .9rem .7rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); transition: border-color .15s, box-shadow .15s; }
+.cap-units li:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
+.cap-unit-top { margin-bottom: .45rem; }
+.cap-unit-top b { padding: .02rem .55rem; border-radius: 999px; background: var(--surface-alt); border: 1px solid var(--border); font-size: .85rem; }
+.cap-track { height: 9px; }
+.cap-units small { margin-top: .4rem; }
+.cap .map-legend { justify-content: center; margin: .9rem 0 0; padding: .55rem .8rem; border-radius: 999px; background: var(--surface-alt); border: 1px solid var(--border); }
+.cap .btn-block { padding: .75rem 1rem; border-radius: 12px; }
+
+/* ---------- 4. Thẻ chỉ số (KPI) ---------- */
+.kpi-grid { gap: 1.1rem; }
+.kpi { padding: 1.2rem 1.3rem 1.1rem; border: 1px solid var(--border); border-left: 1px solid var(--border); border-radius: 18px; background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--k) 4%, var(--surface))); }
+.kpi::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--k), color-mix(in srgb, var(--k) 40%, transparent)); }
+.kpi:hover { transform: translateY(-4px); box-shadow: 0 16px 32px color-mix(in srgb, var(--k) 18%, transparent); border-color: color-mix(in srgb, var(--k) 35%, var(--border)); }
+.kpi-top { color: var(--text-muted); }
+.kpi-icon { width: 48px; height: 48px; border: 0; border-radius: 14px; color: #fff; background: linear-gradient(145deg, color-mix(in srgb, var(--k) 78%, #fff), var(--k)); box-shadow: 0 8px 16px color-mix(in srgb, var(--k) 32%, transparent); }
+.kpi-mid { display: flex; align-items: flex-end; justify-content: space-between; gap: .75rem; margin: .5rem 0 .55rem; }
+.kpi-mid .kpi-value { margin: 0; }
+.kpi-value { font-size: 2.4rem; letter-spacing: -.01em; }
+.kpi-foot { padding-top: .6rem; border-top: 1px dashed var(--border); }
+.kpi-spark { flex: none; width: 112px; height: 38px; overflow: visible; }
+.spark-area { fill: color-mix(in srgb, var(--k) 16%, transparent); }
+.spark-line { fill: none; stroke: var(--k); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.spark-dot { fill: var(--surface); stroke: var(--k); stroke-width: 2.2; }
+.kpi-ring { flex: none; width: 52px; height: 52px; }
+.kpi-ring-bg { fill: none; stroke: color-mix(in srgb, var(--k) 14%, transparent); stroke-width: 6; }
+.kpi-ring-fg { fill: none; stroke: var(--k); stroke-width: 6; stroke-linecap: round; }
+.kpi-ring-txt { fill: var(--text); font-size: 15px; font-weight: 700; font-family: var(--font); }
+
+/* ---------- 5. Bản đồ điểm nóng ---------- */
+.hotspot-card { padding: 1.5rem; }
+.hotspot { gap: 1.5rem; align-items: stretch; }
+.hotspot-map { padding: 1rem; border-radius: 18px; background: radial-gradient(420px 220px at 50% 0, var(--gold-soft), transparent 75%), var(--surface-alt); border: 1px solid var(--border); }
+.hotspot-map .vnmap { border: 0; background: transparent; }
+.hotspot-map .map-legend { justify-content: center; gap: .5rem; margin-top: .9rem; }
+.hotspot-map .map-legend li { padding: .2rem .7rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-weight: 500; }
+.hotspot-side { padding: 1.3rem 1.4rem; border-radius: 18px; background: linear-gradient(180deg, var(--surface), var(--surface-alt)); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.hp-kicker { color: var(--gold); font-weight: 700; }
+.hp-title h3 { font-size: 2rem; }
+.hp-level { padding: .25rem .85rem; font-size: .78rem; }
+.hp-tiles { gap: .8rem; }
+.hp-tile { position: relative; padding: .9rem 1.05rem; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.hp-tile::before { content: ''; position: absolute; left: 0; top: 14%; bottom: 14%; width: 3px; border-radius: 0 3px 3px 0; background: var(--gold); }
+.hp-tile b { font-family: var(--serif); font-size: 1.9rem; }
+.hp-list { border-top: 0; padding: .2rem 1rem; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+.hp-list > div { padding: .7rem 0; }
+.hp-list > div:last-child { border-bottom: 0; }
+.hp-list dd { color: var(--text); }
+.hp-link { padding: .55rem 1rem; border-radius: 10px; background: var(--primary-soft); color: var(--primary); transition: background-color .15s, color .15s; }
+.hp-link:hover { text-decoration: none; background: var(--primary); color: var(--primary-contrast); }
+
+/* ---------- 6. Xu hướng và phân loại ---------- */
+.trend-summary { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0 0 .9rem; }
+.trend-summary span { display: inline-flex; align-items: baseline; gap: .4rem; padding: .4rem .85rem; border-radius: 12px; background: var(--surface-alt); border: 1px solid var(--border); font-size: .8rem; color: var(--text-muted); }
+.trend-summary b { font-family: var(--serif); font-size: 1.15rem; color: var(--text); }
+.trend-line { stroke-width: 3; filter: drop-shadow(0 4px 6px color-mix(in srgb, var(--primary) 30%, transparent)); }
+.trend-dot { stroke-width: 2.5; }
+.trend-dot.last { fill: var(--primary); }
+.trend-halo { fill: color-mix(in srgb, var(--primary) 18%, transparent); }
+.trend-val { fill: var(--text); font-size: 12px; font-weight: 700; font-family: var(--font); }
+.trend-grid { stroke: var(--border); stroke-dasharray: 2 5; }
+
+.type-wrap { display: grid; gap: 1.1rem; }
+.type-donut { display: block; width: 168px; height: 168px; margin: 0 auto; filter: drop-shadow(0 6px 12px rgba(60, 20, 20, .1)); }
+.tdonut-bg { fill: none; stroke: var(--neutral-soft); stroke-width: 15; }
+.tdonut-seg { fill: none; stroke-width: 15; stroke-linecap: butt; transition: stroke-width .15s; }
+.tdonut-seg:hover { stroke-width: 19; }
+.tdonut-num { fill: var(--text); font-family: var(--serif); font-size: 30px; font-weight: 700; }
+.tdonut-cap { fill: var(--text-muted); font-size: 11px; font-family: var(--font); }
+.type-row { padding: .6rem .75rem; border-radius: 12px; border: 1px solid transparent; transition: background-color .15s, border-color .15s; }
+.type-row:hover { background: color-mix(in srgb, var(--c) 6%, transparent); border-color: color-mix(in srgb, var(--c) 22%, transparent); }
+.progress-list li { margin-bottom: .35rem; }
+.type-icon { width: 40px; height: 40px; border-radius: 12px; color: #fff; background: linear-gradient(145deg, color-mix(in srgb, var(--c) 78%, #fff), var(--c)); border: 0; box-shadow: 0 6px 12px color-mix(in srgb, var(--c) 28%, transparent); }
+.progress-track { height: 9px; background: color-mix(in srgb, var(--c, var(--primary)) 10%, var(--neutral-soft)); }
+.head-link { padding: .3rem .75rem; border-radius: 999px; background: var(--primary-soft); }
+.head-link:hover { text-decoration: none; background: var(--primary); color: var(--primary-contrast); }
+
+/* ---------- 7. Bảng báo cáo mới tiếp nhận ---------- */
+.card.flush .table-wrap { padding: 0 .6rem .6rem; }
+.card.flush table { border-collapse: separate; border-spacing: 0 6px; background: transparent; }
+.card.flush table th { padding: .8rem .9rem .5rem; background: transparent; border-bottom: 0; color: var(--text-faint); }
+.card.flush table td { background: var(--surface); border-bottom: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: .85rem .9rem; transition: background-color .15s; }
+.card.flush table td:first-child { border-left: 1px solid var(--border); border-radius: 12px 0 0 12px; }
+.card.flush table td:last-child { border-right: 1px solid var(--border); border-radius: 0 12px 12px 0; }
+.card.flush table tbody tr:hover td { background: var(--surface-alt); border-color: var(--border-strong); }
+.card.flush table tr[data-pri] > td:first-child { box-shadow: inset 4px 0 0 var(--pri-color, transparent); }
+tr[data-pri="thap"] { --pri-color: var(--success); }
+td.code a { display: inline-block; padding: .15rem .55rem; border-radius: 7px; background: var(--primary-soft); color: var(--primary); font-size: .8rem; }
+td.code a:hover { text-decoration: none; background: var(--primary); color: var(--primary-contrast); }
+td.cell-title > a { font-weight: 600; color: var(--text); }
+td.cell-title > a:hover { color: var(--primary); }
+.pri { --pc: var(--success); padding: .2rem .7rem; border-radius: 999px; background: color-mix(in srgb, var(--pc) 12%, transparent); border: 1px solid color-mix(in srgb, var(--pc) 28%, transparent); color: var(--pc); font-size: .8rem; font-weight: 700; }
+.pri i { background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, var(--pc) 20%, transparent); }
+tr[data-pri="cao"] .pri { --pc: var(--danger); }
+tr[data-pri="trung_binh"] .pri { --pc: var(--warning); }
+tr[data-pri="cao"] .pri i, tr[data-pri="trung_binh"] .pri i { background: currentColor; }
+.card.flush .row-actions .icon-btn { width: 38px; height: 38px; border-radius: 50%; transition: background-color .15s, color .15s, transform .15s; }
+.card.flush .row-actions .icon-btn:hover { background: var(--primary); border-color: var(--primary); color: var(--primary-contrast); transform: scale(1.06); }
+.card.flush .pill { box-shadow: 0 0 0 3px var(--primary-soft); }
+.card.flush .card-head { background: linear-gradient(180deg, var(--surface-alt), var(--surface)); }
+
+/* ---------- Máy tính bảng / điện thoại ---------- */
+@media (max-width: 1000px) {
+  .live-flow ol { flex-wrap: wrap; }
+  .live-flow li { flex: 1 1 140px; }
+  .live-main { padding: 1.4rem; }
+}
+@media (max-width: 760px) {
+  .dash-section { margin: 1.3rem 0 .75rem; }
+  .live-alert { align-items: flex-start; }
+  .live-alert-icon { width: 46px; height: 46px; border-radius: 13px; }
+  .live-alert h2 { font-size: 1.25rem; }
+  .live-flow ol { display: grid; grid-template-columns: 1fr 1fr; }
+  .live-flow li > svg { display: none; }
+  .live-percent b { font-size: 2.6rem; }
+  .uq-list { padding: .65rem; }
+  .uq-item { padding: .9rem 1rem .9rem 1.2rem; }
+  .kpi { padding: .95rem 1rem; border-radius: 16px; }
+  .kpi-value { font-size: 1.7rem; }
+  .kpi-icon { width: 38px; height: 38px; border-radius: 11px; }
+  .kpi-spark { width: 70px; height: 30px; }
+  .kpi-ring { width: 42px; height: 42px; }
+  .hotspot-card { padding: 1.1rem; }
+  .hotspot-map, .hotspot-side { padding: .9rem; }
+  .hp-title h3 { font-size: 1.5rem; }
+  .card.flush .table-wrap { padding: 0; }
+  .card.flush table { border-spacing: 0; }
+  .card.flush table.stack tr { margin: .5rem .6rem; border: 1px solid var(--border); border-left: 4px solid var(--pri-color, var(--border)); border-radius: 12px; background: var(--surface); }
+  .card.flush table.stack td { background: transparent; border: 0; border-radius: 0; padding: .2rem 0; }
+  .card.flush table.stack td:first-child, .card.flush table.stack td:last-child { border: 0; border-radius: 0; }
+  .card.flush table.stack tr[data-pri] > td:first-child { box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uq-item, .live-chips > *, .live-flow li a, .live-open, .type-row, .tdonut-seg { transition: none; }
+  .uq-item:hover, .live-chips a:hover, .live-flow li a:hover, .live-open:hover { transform: none; }
+}
