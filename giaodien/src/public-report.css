@@ -1,0 +1,28 @@
+/* Trang người dân gửi báo cáo (/bao-cao): không cần đăng nhập. Dùng chung khung với trang cảnh báo công khai (public-alerts.css) */
+.pub-page .pub-cta { white-space: nowrap; }
+.pub-hero-cta { display: inline-flex; }
+
+.rp-form { padding: 1.4rem 1.5rem 1.5rem; }
+.rp-form .req { color: var(--danger); font-weight: 700; }
+.rp-sub { margin-top: 1.4rem; }
+.rp-privacy { margin: -.2rem 0 1rem; font-size: .84rem; color: var(--text-muted); }
+.rp-agree { margin: .4rem 0 1rem; white-space: normal; align-items: flex-start; }
+.rp-agree input { margin-top: .2rem; flex: none; }
+.rp-form .form-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+/* Ô bẫy chống bot: đưa ra ngoài màn hình (không dùng display:none vì một số bot bỏ qua ô bị display:none) */
+.rp-hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+.rp-done { text-align: center; padding: 2rem 1.5rem; display: grid; gap: .6rem; justify-items: center; }
+.rp-done h2 { margin: 0; font-family: var(--serif); font-size: 1.5rem; }
+.rp-done p { margin: 0; max-width: 520px; line-height: 1.65; }
+.rp-done-icon { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; font-size: 2rem; font-weight: 700; color: var(--success); background: var(--success-soft); border: 2px solid var(--success); }
+.rp-code { font-size: 1.05rem; }
+.rp-code strong { display: inline-block; margin-left: .35rem; padding: .15rem .8rem; border-radius: 8px; font-family: var(--mono); font-size: 1.25rem; letter-spacing: .04em; background: var(--gold-soft); border: 1px solid var(--gold-line); }
+.rp-done .form-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-top: .8rem; }
+
+@media (max-width: 760px) {
+  .rp-form { padding: 1.1rem 1rem 1.2rem; }
+  .rp-done { padding: 1.5rem 1rem; }
+}
+.rp-count { text-align: right; }

@@ -1,0 +1,28 @@
+/* Trung tâm hỗ trợ: ca trực và khung chat với trợ lý AI */
+.support-grid { display: grid; grid-template-columns: 300px 1fr; gap: 1.25rem; align-items: start; }
+.support-sep { border: 0; border-top: 1px solid var(--border); margin: 1.1rem 0; }
+.support-contact { margin: 0; font-size: .86rem; color: var(--text-muted); line-height: 1.6; }
+.support-duty-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.support-duty-list li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem; padding: .7rem .9rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-alt); }
+.support-duty-list a { overflow-wrap: anywhere; }
+
+.chat { display: flex; flex-direction: column; gap: .75rem; }
+.chat-log { height: min(52vh, 460px); min-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: .7rem; padding: .9rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-alt); }
+.chat-empty { margin: auto; text-align: center; color: var(--text-muted); max-width: 34rem; }
+.chat-empty p { margin: .4rem 0 .9rem; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+.chip { padding: .4rem .75rem; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); font: inherit; font-size: .84rem; cursor: pointer; }
+.chip:hover { border-color: var(--primary); color: var(--primary); }
+.chat-msg { max-width: 86%; padding: .6rem .85rem; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); }
+.chat-msg p { margin: .15rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+.chat-msg.me { align-self: flex-end; background: var(--primary-soft); border-color: transparent; }
+.chat-msg.err { background: var(--danger-soft); color: var(--danger); border-color: var(--danger); }
+.chat-who { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--text-faint); }
+.chat-typing { color: var(--text-muted); font-style: italic; }
+.chat-form { display: flex; gap: .6rem; align-items: stretch; }
+.chat-form .field-textarea { resize: vertical; min-height: 2.9rem; max-height: 9rem; }
+
+@media (max-width: 860px) {
+  .support-grid { grid-template-columns: 1fr; }
+  .chat-msg { max-width: 94%; }
+}

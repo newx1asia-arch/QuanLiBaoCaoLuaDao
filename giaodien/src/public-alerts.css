@@ -1,0 +1,65 @@
+/* Trang cảnh báo công khai (/canh-bao): không cần đăng nhập */
+.pub-page { min-height: 100vh; display: flex; flex-direction: column; }
+.pub-main { flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: 1.5rem 1.5rem 2rem; }
+.pub-staff a { color: var(--text-faint); text-decoration: underline; text-underline-offset: 3px; }
+.pub-staff a:hover { color: var(--primary); }
+.pub-hero { margin-bottom: 1.5rem; }
+
+.pub-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 1.25rem; align-items: start; }
+.pub-col { min-width: 0; display: grid; gap: 1rem; }
+
+.pub-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; padding: .9rem 1rem; }
+.pub-search { position: relative; flex: 1 1 220px; min-width: 0; }
+.pub-search svg { position: absolute; left: .8rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); pointer-events: none; }
+.pub-search .field-input { padding-left: 2.4rem; }
+.pub-province { flex: 0 1 200px; }
+.pub-levels { flex: none; }
+
+.pub-list { display: grid; gap: 1rem; }
+.pub-card { --c: var(--info); position: relative; padding: 1.3rem 1.4rem 1.15rem 1.75rem; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; }
+.pub-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--c); }
+.pub-card:hover { transform: translateY(-2px); box-shadow: 0 12px 26px color-mix(in srgb, var(--c) 16%, transparent); }
+.pub-card.lv-khan_cap { --c: var(--danger); background: linear-gradient(90deg, color-mix(in srgb, var(--danger) 8%, var(--surface)), var(--surface) 55%); }
+.pub-card.lv-canh_bao { --c: #d97706; }
+.pub-card.lv-thong_tin { --c: var(--info); }
+.pub-card-top { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; font-size: .82rem; color: var(--text-muted); }
+.pub-level { display: inline-flex; align-items: center; gap: .4rem; padding: .15rem .7rem; border-radius: 999px; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent); border: 1px solid color-mix(in srgb, var(--c) 30%, transparent); }
+.pub-level i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pub-card.lv-khan_cap .pub-level i { animation: map-pulse 1.6s ease-out infinite; }
+.pub-card-top time { display: inline-flex; align-items: center; gap: .3rem; }
+.pub-scope { margin-left: auto; padding: .1rem .6rem; border-radius: 999px; background: var(--surface-alt); border: 1px solid var(--border); font-size: .78rem; }
+.pub-card h2 { margin: .7rem 0 .5rem; font-family: var(--serif); font-size: 1.35rem; line-height: 1.3; }
+.pub-body { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--text); font-size: .98rem; line-height: 1.7; }
+.pub-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; padding-top: .85rem; border-top: 1px dashed var(--border); }
+.pub-card-foot .link-btn { color: var(--primary); font-weight: 600; }
+.pub-card-foot .btn { margin-left: auto; }
+
+.pub-aside { position: sticky; top: calc(var(--header-h) + 1rem); display: grid; gap: 1rem; }
+.pub-hotline { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.2rem; background: linear-gradient(135deg, var(--primary-soft), var(--gold-soft)); border-color: var(--gold-line); }
+.pub-hotline-icon { width: 50px; height: 50px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--primary); color: var(--primary-contrast); box-shadow: 0 8px 16px rgba(155, 17, 30, .28); }
+.pub-hotline small { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+.pub-hotline strong { font-family: var(--serif); font-size: 1.7rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.pub-tips ol { margin: 0; padding-left: 1.2rem; display: grid; gap: .7rem; font-size: .9rem; line-height: 1.6; color: var(--text-muted); }
+.pub-tips li::marker { color: var(--gold); font-weight: 700; }
+
+.pub-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin: 0 auto; width: 100%; max-width: 1180px; padding: 1.1rem 1.5rem 1.5rem; border-top: 1px solid var(--gold-line); color: var(--text-faint); font-size: .8rem; }
+
+@media (max-width: 1000px) {
+  .pub-layout { grid-template-columns: 1fr; }
+  .pub-aside { position: static; order: -1; grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .pub-main { padding: 1rem 1rem 1.5rem; }
+  .pub-aside { grid-template-columns: 1fr; }
+  .pub-province { flex-basis: 100%; }
+  .pub-levels { width: 100%; overflow-x: auto; }
+  .pub-card { padding: 1.1rem 1.1rem 1rem 1.4rem; }
+  .pub-card h2 { font-size: 1.18rem; }
+  .pub-scope { margin-left: 0; }
+  .pub-footer { padding: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pub-card { transition: none; }
+  .pub-card:hover { transform: none; }
+  .pub-card.lv-khan_cap .pub-level i { animation: none; }
+}

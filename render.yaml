@@ -1,0 +1,45 @@
+# Render Blueprint: Render -> New -> Blueprint -> chọn repo này. Chỉ dựng backend (nestjs); giao diện đưa lên Vercel.
+services:
+  - type: web
+    name: baocao-luadao-api
+    runtime: node
+    plan: free
+    rootDir: nestjs
+    # --include=dev: NODE_ENV=production làm npm bỏ qua devDependencies, mà "nest build" cần @nestjs/cli và typescript
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      # Các biến dưới đây phải tự điền trong giao diện Render (xem HUONG-DAN-TRIEN-KHAI.md)
+      - key: CORS_ORIGIN
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_SSL
+        value: "true"
+      - key: DB_SSL_CA
+        sync: false
+      # Lần chạy đầu để true cho backend tự tạo bảng; tạo xong đổi thành false rồi deploy lại
+      - key: DB_SYNC
+        value: "true"
+      # Trợ lý AI của Trung tâm hỗ trợ (khóa Gemini lấy ở https://aistudio.google.com/apikey). Thiếu thì trợ lý báo chưa cấu hình
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
